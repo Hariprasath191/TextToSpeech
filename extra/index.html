@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Multi-Tone Voice Generation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-microphone-alt"></i>
+                <h1>AI Voice Generator</h1>
+            </div>
+            <p class="tagline">Transform text into expressive speech with AI-powered tone variations</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-keyboard"></i>
+                    <h2>Enter Your Text</h2>
+                </div>
+                <div class="card-body">
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Type or paste your text here... (Maximum 50,000 characters)"
+                        maxlength="50000"
+                    ></textarea>
+                    <div class="char-count">
+                        <span id="charCount">0</span> / 50,000 characters
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-sliders-h"></i>
+                    <h2>Voice Settings</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Voice Gender Selection -->
+                    <div class="setting-group">
+                        <label class="setting-label">
+                            <i class="fas fa-user"></i>
+                            Voice Gender
+                        </label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="voice_gender" value="female" checked>
+                                <span class="radio-custom"></span>
+                                Female
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="voice_gender" value="male">
+                                <span class="radio-custom"></span>
+                                Male
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Tone Selection -->
+                    <div class="setting-group">
+                        <label class="setting-label">
+                            <i class="fas fa-music"></i>
+                            Voice Tone
+                        </label>
+                        <div class="tone-grid">
+                            <label class="tone-card active">
+                                <input type="radio" name="tone" value="neutral" checked>
+                                <div class="tone-icon">😐</div>
+                                <div class="tone-name">Neutral</div>
+                                <div class="tone-desc">Balanced & Clear</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="happy">
+                                <div class="tone-icon">😊</div>
+                                <div class="tone-name">Happy</div>
+                                <div class="tone-desc">Cheerful & Upbeat</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="sad">
+                                <div class="tone-icon">😢</div>
+                                <div class="tone-name">Sad</div>
+                                <div class="tone-desc">Somber & Low</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="calm">
+                                <div class="tone-icon">😌</div>
+                                <div class="tone-name">Calm</div>
+                                <div class="tone-desc">Peaceful & Soothing</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="energetic">
+                                <div class="tone-icon">⚡</div>
+                                <div class="tone-name">Energetic</div>
+                                <div class="tone-desc">Fast & Dynamic</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="professional">
+                                <div class="tone-icon">💼</div>
+                                <div class="tone-name">Professional</div>
+                                <div class="tone-desc">Formal & Clear</div>
+                            </label>
+                            <label class="tone-card">
+                                <input type="radio" name="tone" value="gentle">
+                                <div class="tone-icon">🤗</div>
+                                <div class="tone-name">Gentle</div>
+                                <div class="tone-desc">Soft & Warm</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button id="generateBtn" class="generate-btn">
+                <i class="fas fa-magic"></i>
+                Generate Speech
+            </button>
+
+            <!-- Audio Output Section -->
+            <div id="audioOutput" class="card audio-output" style="display: none;">
+                <div class="card-header">
+                    <i class="fas fa-volume-up"></i>
+                    <h2>Generated Audio</h2>
+                </div>
+                <div class="card-body">
+                    <div class="audio-player">
+                        <audio id="audioPlayer" controls></audio>
+                    </div>
+                    <div class="audio-actions">
+                        <button id="downloadBtn" class="action-btn download-btn">
+                            <i class="fas fa-download"></i>
+                            Download Audio
+                        </button>
+                        <button id="newGenerationBtn" class="action-btn new-btn">
+                            <i class="fas fa-redo"></i>
+                            Generate New
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating your speech with AI magic...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText"></span>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI-Based Multi-Tone Voice Generation System</p>
+            <p class="footer-note">Powered by AI Speech Synthesis Technology</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
