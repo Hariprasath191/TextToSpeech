@@ -1,0 +1,400 @@
+# AI-BASED MULTI-TONE VOICE GENERATION SYSTEM
+## Complete Setup and Running Guide
+
+---
+
+## QUICK START (3 Simple Steps)
+
+### Windows Users:
+1. Double-click `run.bat`
+2. Wait for installation to complete
+3. Open browser to http://localhost:5000
+
+### Mac/Linux Users:
+1. Open Terminal in project folder
+2. Run: `./run.sh`
+3. Open browser to http://localhost:5000
+
+---
+
+## DETAILED INSTALLATION GUIDE
+
+### Prerequisites
+
+#### 1. Python Installation
+**Required Version**: Python 3.7 or higher
+
+**Check if Python is installed:**
+```bash
+python --version
+# or
+python3 --version
+```
+
+**Download Python:**
+- Windows/Mac: https://www.python.org/downloads/
+- Linux: Usually pre-installed, or use `sudo apt install python3`
+
+#### 2. FFmpeg Installation (IMPORTANT!)
+
+FFmpeg is required for audio processing.
+
+**Windows:**
+1. Download from: https://www.gyan.dev/ffmpeg/builds/
+2. Extract the ZIP file
+3. Add the `bin` folder to your System PATH:
+   - Right-click 'This PC' → Properties
+   - Advanced System Settings → Environment Variables
+   - Edit 'Path' → Add FFmpeg bin folder path
+   - Restart Command Prompt
+
+**macOS:**
+```bash
+# Using Homebrew (recommended)
+brew install ffmpeg
+
+# Or using MacPorts
+sudo port install ffmpeg
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
+
+**Linux (Fedora):**
+```bash
+sudo dnf install ffmpeg
+```
+
+**Verify FFmpeg installation:**
+```bash
+ffmpeg -version
+```
+
+#### 3. Additional Linux Requirements
+
+For Linux users, also install espeak:
+```bash
+sudo apt-get install espeak
+```
+
+---
+
+## MANUAL INSTALLATION STEPS
+
+### Step 1: Extract Project Files
+Extract all project files to a folder, for example:
+- Windows: `C:\Projects\ai-voice-generator`
+- Mac/Linux: `~/Projects/ai-voice-generator`
+
+### Step 2: Install Python Dependencies
+
+Open Terminal/Command Prompt in the project folder:
+
+```bash
+# Install required packages
+pip install -r requirements.txt
+
+# If you get permission errors on Mac/Linux:
+pip install --user -r requirements.txt
+
+# Or use pip3:
+pip3 install -r requirements.txt
+```
+
+This will install:
+- Flask (web framework)
+- pyttsx3 (text-to-speech engine)
+- pydub (audio processing)
+
+### Step 3: Verify Installation
+
+```bash
+# Test if packages are installed
+python -c "import flask; import pyttsx3; import pydub; print('All packages installed successfully!')"
+```
+
+### Step 4: Run the Application
+
+```bash
+# Run the app
+python app.py
+
+# Or on Mac/Linux:
+python3 app.py
+```
+
+You should see:
+```
+ * Running on http://0.0.0.0:5000
+ * Running on http://127.0.0.1:5000
+```
+
+### Step 5: Access the Application
+
+Open your web browser and go to:
+```
+http://localhost:5000
+```
+
+---
+
+## TROUBLESHOOTING
+
+### Common Issues and Solutions
+
+#### Issue 1: "Module not found" error
+**Solution:**
+```bash
+pip install [module-name]
+# For example:
+pip install flask
+pip install pyttsx3
+pip install pydub
+```
+
+#### Issue 2: FFmpeg not found
+**Error:** `FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'`
+
+**Solution:**
+- Install FFmpeg (see installation section above)
+- Make sure it's added to your system PATH
+- Restart your terminal/command prompt
+- Test: `ffmpeg -version`
+
+#### Issue 3: Permission denied (Linux/Mac)
+**Solution:**
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+#### Issue 4: Port 5000 already in use
+**Solution:**
+Edit `app.py` and change the port:
+```python
+# Change this line at the bottom:
+app.run(debug=True, host='0.0.0.0', port=8080)  # Changed from 5000 to 8080
+```
+
+Then access: http://localhost:8080
+
+#### Issue 5: No voices available
+**Windows:** Install Microsoft Speech Platform
+**Mac:** Voices are built-in
+**Linux:** Install espeak: `sudo apt-get install espeak`
+
+#### Issue 6: Audio file won't play
+**Solutions:**
+- Clear browser cache
+- Try a different browser (Chrome recommended)
+- Check browser console for errors (F12)
+- Ensure FFmpeg is properly installed
+
+---
+
+## USING THE APPLICATION
+
+### Basic Usage
+
+1. **Enter Text**
+   - Type or paste your text (max 5000 characters)
+   - Character count updates in real-time
+
+2. **Select Voice Gender**
+   - Choose Male or Female
+   - Depends on available system voices
+
+3. **Choose Voice Tone**
+   - Neutral: Standard, balanced voice
+   - Happy: Upbeat, cheerful
+   - Sad: Slower, lower pitch
+   - Calm: Soothing, peaceful
+   - Energetic: Fast, dynamic
+   - Professional: Formal, clear
+   - Gentle: Soft, warm
+
+4. **Generate Speech**
+   - Click "Generate Speech" button
+   - Wait for processing (5-15 seconds)
+   - Audio plays automatically
+
+5. **Download Audio**
+   - Click "Download Audio" button
+   - File saves as MP3 format
+
+### Keyboard Shortcuts
+
+- `Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (Mac): Generate speech
+- `Esc`: Close error messages
+
+---
+
+## PROJECT STRUCTURE
+
+```
+ai-voice-generator/
+│
+├── app.py                    # Main Flask application
+├── requirements.txt          # Python dependencies
+├── README.md                # Documentation
+├── SETUP_GUIDE.txt          # This file
+├── run.sh                   # Linux/Mac run script
+├── run.bat                  # Windows run script
+│
+├── templates/
+│   └── index.html           # Main HTML page
+│
+├── static/
+│   ├── css/
+│   │   └── style.css        # Styles
+│   ├── js/
+│   │   └── script.js        # JavaScript
+│   └── audio/               # Generated audio (auto-created)
+│
+└── documentation/
+    └── PROJECT_DOCUMENT.txt # Project documentation
+```
+
+---
+
+## FEATURES
+
+✅ 7 Different Voice Tones
+✅ Male & Female Voice Options
+✅ Real-time Character Count
+✅ Audio Preview & Playback
+✅ Download Generated Audio
+✅ Modern, Responsive UI
+✅ Automatic File Cleanup
+✅ Error Handling
+✅ Mobile-Friendly Design
+
+---
+
+## SYSTEM REQUIREMENTS
+
+**Minimum:**
+- Python 3.7+
+- 2 GB RAM
+- 100 MB free disk space
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+
+**Recommended:**
+- Python 3.9+
+- 4 GB RAM
+- 500 MB free disk space
+- Chrome browser (best compatibility)
+
+---
+
+## CONFIGURATION
+
+### Change Voice Settings
+
+Edit `TONE_SETTINGS` in `app.py`:
+
+```python
+TONE_SETTINGS = {
+    'neutral': {
+        'rate': 150,      # Words per minute (50-300)
+        'pitch': 1.0,     # Pitch multiplier (0.5-2.0)
+        'speed': 1.0      # Speed multiplier (0.5-2.0)
+    }
+}
+```
+
+### Change Port Number
+
+In `app.py`, modify the last line:
+```python
+app.run(debug=True, host='0.0.0.0', port=5000)
+```
+
+### Change File Cleanup Time
+
+In `app.py`, find the cleanup function and modify:
+```python
+if (current_time - file_time).seconds > 3600:  # 3600 = 1 hour
+```
+
+---
+
+## STOPPING THE APPLICATION
+
+- Press `Ctrl + C` in the terminal
+- Or close the terminal window
+
+---
+
+## UNINSTALLATION
+
+1. Stop the application (Ctrl + C)
+2. Delete the project folder
+3. (Optional) Uninstall Python packages:
+   ```bash
+   pip uninstall flask pyttsx3 pydub
+   ```
+
+---
+
+## GETTING HELP
+
+### Documentation
+- Flask: https://flask.palletsprojects.com/
+- pyttsx3: https://pyttsx3.readthedocs.io/
+- pydub: https://github.com/jiaaro/pydub
+
+### Common Questions
+
+**Q: Can I use this commercially?**
+A: This is an educational project. For commercial use, consider professional TTS services.
+
+**Q: Can I add more languages?**
+A: Yes, pyttsx3 supports multiple languages if voices are installed on your system.
+
+**Q: How do I improve voice quality?**
+A: Consider upgrading to neural TTS services like Google Cloud TTS or Amazon Polly.
+
+**Q: Is internet required?**
+A: No, this works offline once installed.
+
+---
+
+## SECURITY NOTES
+
+- Application runs locally on your machine
+- No data is sent to external servers
+- Generated audio files are stored temporarily
+- Files are auto-deleted after 1 hour
+
+---
+
+## CREDITS
+
+Developed as part of AI-Based Multi-Tone Voice Generation System project.
+
+Technologies used:
+- Python & Flask
+- pyttsx3 (Text-to-Speech)
+- pydub (Audio Processing)
+- HTML5, CSS3, JavaScript
+
+---
+
+## VERSION HISTORY
+
+v1.0.0 (Current)
+- Initial release
+- 7 voice tones
+- Male/Female voices
+- Audio download
+- Modern UI
+
+---
+
+**Last Updated:** January 2025
+
+For more information, check README.md or PROJECT_DOCUMENT.txt
