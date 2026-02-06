@@ -4,6 +4,8 @@ import os
 from datetime import datetime
 import subprocess
 import wave
+import shutil
+print("FFmpeg path:", shutil.which("ffmpeg"))
 
 app = Flask(__name__)
 
